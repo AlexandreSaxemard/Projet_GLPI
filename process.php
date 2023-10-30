@@ -19,17 +19,19 @@ try {
                     WHERE c.contact = ?";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("s", $contact);
+            $user_name = $contact; // Utilisez la valeur du contact ici
+
         } else {
             $sql = "SELECT c.id, c.name AS computer_name
                     FROM glpi_computers c
                     WHERE c.users_id = ?";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("i", $selected_user);
+            $user_name = fetch_user_name_by_id($selected_user); // Utilisez la fonction pour les utilisateurs ici
         }
 
         $stmt->execute();
         $computers = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-        $user_name = fetch_user_name_by_id($selected_user);
 
         if (!empty($computers)) {
             $file_content .= "Liste des ordinateurs de l'utilisateur '$user_name':\n";
@@ -63,7 +65,8 @@ try {
 }
 
 // Fonction pour récupérer le nom de l'utilisateur par son ID
-function fetch_user_name_by_id($user_id) {
+function fetch_user_name_by_id($user_id)
+{
     // Inclure le fichier de configuration de la base de données
     include('db.php');
 
