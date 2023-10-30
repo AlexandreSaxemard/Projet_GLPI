@@ -20,7 +20,9 @@ $users = $result->fetch_all(MYSQLI_ASSOC);
 $stmt->close();
 
 // Afficher les utilisateurs dans le format souhaité
+echo '<select multiple class="form-select" id="userSelect" style="width: 100%;">';
 foreach ($users as $user) {
     $id = $user['id'] ?? 'contact_' . $user['contact'];
-    echo '<label><input type="checkbox" name="selected_users[]" value="' . $id . '"> ' . $user['name'] . ' - ' . $user['contact'] . '</label><br>';
+    echo '<option value="' . $id . '">' . $user['name'] . ' - ' . $user['contact'] . '</option>';
 }
+echo '</select>';
