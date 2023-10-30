@@ -1,3 +1,6 @@
-Liste des ordinateurs de l'utilisateur 'Utilisateur inconnu':
+Liste des ordinateurs de l'utilisateur 'saxemard':
+SC-SI2-2K23 (ID: 270)
+
+Liste des ordinateurs de l'utilisateur 'dani@CROUSNICE':
 SC-AS01 (ID: 131)
 

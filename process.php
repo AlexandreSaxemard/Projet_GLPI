@@ -1,10 +1,11 @@
 <?php
 include('db.php');
 
-$selected_users = isset($_POST['users']) ? $_POST['users'] : [];
+$selected_users = isset($_POST['users']) ? explode(',', $_POST['users']) : [];
 
+// Ajoutez cette vérification au début de votre fichier process.php
 if (empty($selected_users)) {
-    echo "Aucun utilisateur n'a été sélectionné.";
+    echo "Aucun utilisateur n'a été sélectionné. Veuillez sélectionner au moins un utilisateur.";
     exit;
 }
 

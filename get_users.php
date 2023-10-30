@@ -22,6 +22,5 @@ $stmt->close();
 // Afficher les utilisateurs dans le format souhaité
 foreach ($users as $user) {
     $id = $user['id'] ?? 'contact_' . $user['contact'];
-    echo '<option value="' . $id . '">' . $user['name'] . ' - ' . $user['contact'] . '</option>';
+    echo '<label><input type="checkbox" name="selected_users[]" value="' . $id . '"> ' . $user['name'] . ' - ' . $user['contact'] . '</label><br>';
 }
-?>
