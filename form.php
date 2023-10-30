@@ -19,7 +19,7 @@
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Rechercher des utilisateurs</label>
+                <label class="form-label">Rechercher des utilisateurs pour obtenir la liste de leur(s) ordinateur(s)</label>
                 <div id="selectedUsers">
                     <!-- Liste des cases à cocher générée depuis get_users.php -->
                     <?php include("get_users.php"); ?>
