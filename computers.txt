@@ -1,0 +1,3 @@
+Liste des ordinateurs de l'utilisateur 'Utilisateur inconnu':
+SC-AS01 (ID: 131)
+
