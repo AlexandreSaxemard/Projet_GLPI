@@ -37,7 +37,7 @@ try {
         if (!empty($computers)) {
             $file_content .= "Liste des ordinateurs de l'utilisateur '$user_name':\n";
             foreach ($computers as $computer) {
-                $line = $computer['computer_name'] . " (ID: " . $computer['id'] . ")\n";
+                $line = $computer['computer_name'] . "\n";
                 $file_content .= $line;
             }
             $file_content .= "\n";

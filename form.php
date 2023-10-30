@@ -27,7 +27,7 @@
             </div>
 
             <input type="hidden" name="users" id="selectedUsersInput">
-            <button type="submit" id="submitButton" class="btn btn-primary">Rechercher</button>
+            <button type="submit" id="submitButton" class="btn btn-primary">Télécharger</button>
         </form>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
