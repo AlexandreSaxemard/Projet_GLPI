@@ -34,7 +34,7 @@ try {
 
         } else {
             // Si c'est un utilisateur, récupérer les ordinateurs liés à cet utilisateur
-            $sql = "SELECT c.id, c.name AS computer_name
+            $sql = "SELECT c.id, c.name AS computer_name, c.serial, c.date_mod, c.date_creation
                     FROM glpi_computers c
                     WHERE c.users_id = ?";
 
@@ -53,9 +53,12 @@ try {
         // Vérifier si des ordinateurs ont été trouvés pour cet utilisateur/contact
         if (!empty($computers)) {
             // Ajouter le nom de l'utilisateur/contact et la liste des ordinateurs au contenu du fichier
-            $file_content .= "Liste des ordinateurs de l'utilisateur '$user_name':\n";
+            $file_content .= "Liste des ordinateurs de l'utilisateur '$user_name':\n\n";
             foreach ($computers as $computer) {
-                $line = $computer['computer_name'] . "\n";
+                $line = "Nom de l'ordinateur : " . $computer['computer_name'] . "\n";
+                $line .= "Numéro de série : " . $computer['serial'] . "\n";
+                $line .= "Date de modification : " . $computer['date_mod'] . "\n";
+                $line .= "Date de création : " . $computer['date_creation'] . "\n";
                 $file_content .= $line;
             }
             $file_content .= "\n"; // Ajouter une ligne vide pour séparer les utilisateurs/contacts
