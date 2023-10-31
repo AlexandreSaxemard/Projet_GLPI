@@ -28,6 +28,19 @@ $(document).ready(function () {
     checkDownloadButtonState();
   });
 
+  // Bouton pour sélectionner tous les utilisateurs
+  $("#selectAllButton").click(function () {
+    if ($(this).text() === "Sélectionner tous") {
+      $("#userSelect > option").prop("selected", true);
+      $("#userSelect").trigger("change");
+      $(this).text("Désélectionner tous");
+    } else {
+      $("#userSelect > option").prop("selected", false);
+      $("#userSelect").trigger("change");
+      $(this).text("Sélectionner tous");
+    }
+  });
+
   // Fonction pour vérifier l'état du bouton de téléchargement
   function checkDownloadButtonState() {
     // Si aucun utilisateur n'est sélectionné, désactiver le bouton
