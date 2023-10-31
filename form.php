@@ -10,7 +10,7 @@
 <body>
     <div class="container mt-5">
         <h1>Formulaire d'inventaire</h1>
-        <form action="process.php" method="POST">
+        <form action="process_excel.php" method="POST">
             <?php include("db.php"); ?>
 
             <div class="mb-3">
