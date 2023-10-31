@@ -10,7 +10,7 @@
 <body>
     <div class="container mt-5">
         <h1>Formulaire d'inventaire</h1>
-        <form action="process_excel.php" method="POST">
+        <form method="POST" id="mainForm">
             <?php include("db.php"); ?>
 
             <div class="mb-3">
@@ -21,6 +21,19 @@
             </div>
 
             <button type="button" id="selectAllButton" class="btn btn-secondary">Sélectionner tous</button>
+
+            <!-- Ajout du choix du format -->
+            <div class="mb-3">
+                <label class="form-label">Format du fichier :</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="fileType" id="excel" value="excel" checked>
+                    <label class="form-check-label" for="excel">Excel</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="fileType" id="text" value="text">
+                    <label class="form-check-label" for="text">Texte</label>
+                </div>
+            </div>
 
             <input type="hidden" name="users" id="selectedUsersInput">
             <button type="submit" id="submitButton" class="btn btn-primary">Télécharger</button>
