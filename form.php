@@ -20,13 +20,13 @@
                 </div>
             </div>
 
-            <button type="button" id="selectAllButton" class="btn btn-secondary">Sélectionner tous</button>
+            <button type="button" id="selectAllButton" class="btn btn-secondary">Sélectionner tout</button>
 
             <!-- Ajout du choix du format -->
             <div class="mb-3">
                 <label class="form-label">Format du fichier :</label>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="fileType" id="excel" value="excel" checked>
+                    <input class="form-check-input" type="radio" name="fileType" id="excel" value="excel">
                     <label class="form-check-label" for="excel">Excel</label>
                 </div>
                 <div class="form-check">

@@ -22,11 +22,11 @@ $(document).ready(function () {
     if ($(this).text() === "Sélectionner tous") {
       $("#userSelect > option").prop("selected", true);
       $("#userSelect").trigger("change");
-      $(this).text("Désélectionner tous");
+      $(this).text("Désélectionner tout");
     } else {
       $("#userSelect > option").prop("selected", false);
       $("#userSelect").trigger("change");
-      $(this).text("Sélectionner tous");
+      $(this).text("Sélectionner tout");
     }
   });
 
