@@ -19,10 +19,10 @@ $(document).ready(function () {
   });
 
   $("#selectAllButton").click(function () {
-    if ($(this).text() === "Sélectionner tous") {
+    if ($(this).text() === "Sélectionner tout") {
       $("#userSelect > option").prop("selected", true);
       $("#userSelect").trigger("change");
-      $(this).text("Désélectionner tout");
+      $(this).text("Désélectionner tous");
     } else {
       $("#userSelect > option").prop("selected", false);
       $("#userSelect").trigger("change");

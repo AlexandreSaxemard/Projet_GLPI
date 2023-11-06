@@ -1,6 +1,4 @@
-Liste des ordinateurs de l'utilisateur 'saxemard':
-SC-SI2-2K23 (ID: 270)
+Liste des ordinateurs de l'utilisateur 'admsaxemard@CROUSNICE':
 
-Liste des ordinateurs de l'utilisateur 'dani@CROUSNICE':
-SC-AS01 (ID: 131)
+Nom de l'ordinateur : SC-SI2-2K23, Numéro de série : 5CD3161NLG, Date de modification : 2023-11-06 09:16:46, Date de création : 2023-09-05 14:37:26
 

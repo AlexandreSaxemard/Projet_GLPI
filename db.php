@@ -1,11 +1,12 @@
 <?php
-$servername = 'localhost';
-$username = 'glpi_test';
+$servername = '10.249.64.102';
+$username = 'glpi';
 $password = '2j1l1p';
 $dbname = 'glpi';
+$port = 3306;
 
 // On établit la connexion
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($servername, $username, $password, $dbname, $port);
 
 // On vérifie la connexion
 if ($conn->connect_error) {
