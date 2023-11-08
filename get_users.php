@@ -11,6 +11,7 @@ $sql = "SELECT DISTINCT u.id, u.name, c.contact
         FROM glpi_computers c
         WHERE c.users_id = 0";
 
+// Préparation de la requête SQL
 $stmt = $conn->prepare($sql);
 $stmt->execute();
 $result = $stmt->get_result();
