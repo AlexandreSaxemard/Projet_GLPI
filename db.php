@@ -1,4 +1,6 @@
 <?php
+
+// Paramètres de connexion à la base de données
 $servername = '10.249.64.102';
 $username = 'glpi';
 $password = '2j1l1p';
