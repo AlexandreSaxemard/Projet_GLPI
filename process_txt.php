@@ -1,45 +1,47 @@
 <?php
-// Inclut le fichier de configuration de la base de données
+// Inclusion du fichier de configuration de la base de données
 include('db.php');
 
-// Récupère les utilisateurs sélectionnés depuis le formulaire et les convertit en un tableau
+// Récupération des utilisateurs sélectionnés depuis le formulaire et conversion en tableau
 $selected_users = isset($_POST['users']) ? explode(',', $_POST['users']) : [];
 
-// Vérifie si des utilisateurs ont été sélectionnés
+// Vérifier si des utilisateurs ont été sélectionnés
 if (empty($selected_users)) {
     echo "Aucun utilisateur n'a été sélectionné. Veuillez sélectionner au moins un utilisateur.";
     exit;
 }
 
 try {
-    // Initialise le contenu du fichier texte
+    // Initialisation du contenu du fichier texte
     $file_content = "";
 
-    // Parcourt la liste des utilisateurs sélectionnés
+    // On parcourt la liste des utilisateurs sélectionnés
     foreach ($selected_users as $selected_user) {
-        // Vérifie si l'élément est un contact en cherchant la chaîne 'contact_'
+
+        // On vérifie si l'élément est un contact en cherchant la chaîne 'contact_'
         if (strpos($selected_user, 'contact_') === 0) {
-            // Supprime 'contact_' pour obtenir seulement le nom du contact
+
+            // Suppression de 'contact_' pour obtenir seulement le nom du contact
             $contact = str_replace('contact_', '', $selected_user);
 
-            // Modifie la requête SQL pour inclure serial, date_mod et date_creation
-            // Ajoute également une condition pour que users_id soit égal à 0
+            // Récupère les informations de l'ordinateur pour un contact
             $sql = "SELECT c.id, c.name AS computer_name, c.serial, c.date_mod, c.date_creation 
                     FROM glpi_computers c
                     WHERE c.contact = ? AND c.users_id = 0";
 
             // Prépare la requête SQL
             $stmt = $conn->prepare($sql);
+
             $stmt->bind_param("s", $contact);
+
             $user_name = $contact; // Utilise le nom du contact comme nom d'utilisateur
         } else {
-            // Si ce n'est pas un contact, alors c'est un utilisateur. 
-            // Récupère les informations correspondantes
+            // Sinon alors c'est un utilisateur + récupération des informations correspondantes
             $sql = "SELECT c.id, c.name AS computer_name, c.serial, c.date_mod, c.date_creation 
                     FROM glpi_computers c
                     WHERE c.users_id = ?";
 
-            // Prépare la requête SQL
+            // Préparation de la requête SQL
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("i", $selected_user);
             $user_name = fetch_user_name_by_id($selected_user); // Utilise une fonction pour récupérer le nom d'utilisateur
@@ -47,15 +49,23 @@ try {
 
         // Exécute la requête SQL
         $stmt->execute();
+
         // Récupère les résultats dans un tableau associatif
         $computers = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
         // Si des ordinateurs ont été trouvés pour cet utilisateur/contact
         if (!empty($computers)) {
+
+            // Ajoute le nom de l'utilisateur au contenu du fichier
             $file_content .= "Liste des ordinateurs de l'utilisateur '$user_name':\n\n";
+
+            // Parcours la liste des ordinateurs
             foreach ($computers as $computer) {
+
                 // Construit une ligne de texte pour chaque ordinateur
                 $line = "Nom de l'ordinateur : " . $computer['computer_name'] . ", ";
+
+                // Ajoute les autres informations si elles existent
                 if (isset($computer['serial'])) {
                     $line .= "Numéro de série : " . $computer['serial'] . ", ";
                 }
@@ -65,19 +75,26 @@ try {
                 if (isset($computer['date_creation'])) {
                     $line .= "Date de création : " . $computer['date_creation'];
                 }
+
                 $line .= "\n";
+
                 $file_content .= $line;
             }
-            $file_content .= "\n"; // Ajoute une ligne vide pour séparer les utilisateurs/contacts
+
+            // Ajoute une ligne vide pour séparer les utilisateurs/contacts
+            $file_content .= "\n"; 
         }
     }
 
-    // Vérifie si des données ont été trouvées
+    // Vérification si des données ont été trouvées
     if (empty($file_content)) {
         echo "Aucun ordinateur n'a été trouvé pour les utilisateurs/contacts sélectionnés.";
     } else {
+
         // Génère le fichier texte
         $file_path = "computers.txt";
+
+        // Écrit le contenu du fichier
         file_put_contents($file_path, $file_content);
 
         // Configure les en-têtes pour forcer le téléchargement du fichier

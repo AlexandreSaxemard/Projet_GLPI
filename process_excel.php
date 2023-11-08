@@ -1,13 +1,15 @@
 <?php
-// Inclure les fichiers nécessaires
+// Inclusion des fichiers nécessaires
 include('db.php');
 require 'vendor/autoload.php';
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
+// Récupération des utilisateurs sélectionnés depuis le formulaire et conversion en tableau
 $selected_users = isset($_POST['users']) ? explode(',', $_POST['users']) : [];
 
+// Vérifier si des utilisateurs ont été sélectionnés
 if (empty($selected_users)) {
     echo "Aucun utilisateur n'a été sélectionné. Veuillez sélectionner au moins un utilisateur.";
     exit;
@@ -28,23 +30,36 @@ $sheet->setCellValue('E1', 'Date de création');
 $row = 2;
 
 try {
-    foreach ($selected_users as $selected_user) {
-        $user_name_written = false;  // Variable pour suivre si le nom a déjà été écrit
 
+    // On parcourt la liste des utilisateurs sélectionnés
+    foreach ($selected_users as $selected_user) {
+
+        // Variable pour suivre si le nom a déjà été écrit
+        $user_name_written = false;  
+
+        // On vérifie si l'élément est un contact en cherchant la chaîne 'contact_'
         if (strpos($selected_user, 'contact_') === 0) {
+
+            // Suppression de 'contact_' pour obtenir seulement le nom du contact
             $contact = str_replace('contact_', '', $selected_user);
+
+            // Récupère les informations de l'ordinateur pour un contact
             $sql = "SELECT c.id, c.name AS computer_name, c.serial, c.date_mod, c.date_creation 
                     FROM glpi_computers c
                     WHERE c.contact = ? AND c.users_id = 0";
 
+            // Préparation de la requête SQL
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("s", $contact);
             $user_name = $contact;
         } else {
+
+            // Sinon alors c'est un utilisateur + récupération des informations correspondantes
             $sql = "SELECT c.id, c.name AS computer_name, c.serial, c.date_mod, c.date_creation 
                     FROM glpi_computers c
                     WHERE c.users_id = ?";
 
+            // Préparation de la requête SQL
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("i", $selected_user);
             $user_name = fetch_user_name_by_id($selected_user);
@@ -53,6 +68,7 @@ try {
         $stmt->execute();
         $computers = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
+        // Si un nom d'utilisateur a été trouvé
         if (!empty($computers)) {
             foreach ($computers as $computer) {
                 if (!$user_name_written) {
@@ -68,10 +84,16 @@ try {
         }
     }
 
+    // Enregistrement du fichier Excel
     $writer = new Xlsx($spreadsheet);
+
+    // Nom du fichier
     $file_path = 'computers.xlsx';
+
+    // Enregistrement du fichier
     $writer->save($file_path);
 
+    // Téléchargement du fichier
     header('Content-Description: File Transfer');
     header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
     header('Content-Disposition: attachment; filename="'.basename($file_path).'"');
@@ -79,13 +101,20 @@ try {
     header('Cache-Control: must-revalidate');
     header('Pragma: public');
     header('Content-Length: '.filesize($file_path));
+
+    // Envoi du fichier
     flush();
     readfile($file_path);
     exit;
+
 } catch (Exception $e) {
+
+    // Afficher l'erreur
     echo "Une erreur s'est produite : " . $e->getMessage();
+
 }
 
+// Fonction pour récupérer le nom de l'utilisateur en fonction de son ID
 function fetch_user_name_by_id($user_id)
 {
     include('db.php');

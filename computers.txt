@@ -1,4 +1,15 @@
+Liste des ordinateurs de l'utilisateur 'luce':
+
+Nom de l'ordinateur : SI1, Numéro de série : S4V40560, Date de modification : 2023-11-08 15:40:49, Date de création : 2022-05-11 08:13:34
+Nom de l'ordinateur : SC-DN-LP, Numéro de série : 5CD3161NLK, Date de modification : 2023-11-08 08:26:03, Date de création : 2023-07-26 11:42:25
+Nom de l'ordinateur : LP-TRAVAUX, Numéro de série : C8H3P93, Date de modification : 2023-10-05 09:53:09, Date de création : 2023-10-04 15:17:24
+
+Liste des ordinateurs de l'utilisateur 'petit':
+
+Nom de l'ordinateur : SC-DSI-YODA, Numéro de série : S4V40572, Date de modification : 2023-10-27 18:07:01, Date de création : 2022-06-21 12:51:52
+Nom de l'ordinateur : HP EliteBook 650 15.6 inch G9 Notebook PC I7, Numéro de série : 5CD3161NLJ, Date de modification : 2023-11-07 17:41:28, Date de création : 2023-04-28 08:50:49
+
 Liste des ordinateurs de l'utilisateur 'admsaxemard@CROUSNICE':
 
-Nom de l'ordinateur : SC-SI2-2K23, Numéro de série : 5CD3161NLG, Date de modification : 2023-11-06 09:16:46, Date de création : 2023-09-05 14:37:26
+Nom de l'ordinateur : SC-SI2-2K23, Numéro de série : 5CD3161NLG, Date de modification : 2023-11-08 08:41:33, Date de création : 2023-09-05 14:37:26
 
