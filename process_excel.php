@@ -84,10 +84,10 @@ try {
         }
     }
 
-    // Enregistrement du fichier Excel
+    // Création d'un objet Writer pour enregistrer le fichier Excel
     $writer = new Xlsx($spreadsheet);
 
-    // Nom du fichier
+    // Chemin du fichier
     $file_path = 'computers.xlsx';
 
     // Enregistrement du fichier
@@ -117,13 +117,20 @@ try {
 // Fonction pour récupérer le nom de l'utilisateur en fonction de son ID
 function fetch_user_name_by_id($user_id)
 {
+
+    // Inclusion du fichier de connexion à la base de données
     include('db.php');
+
+    // Récupération du nom de l'utilisateur
     $sql = "SELECT name FROM glpi_users WHERE id = ?";
+
+    // Préparation de la requête SQL
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $user_id);
     $stmt->execute();
     $result = $stmt->get_result();
 
+    // Si un nom d'utilisateur a été trouvé
     if ($row = $result->fetch_assoc()) {
         return $row['name'];
     } else {
